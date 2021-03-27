@@ -2,55 +2,49 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
+        <title>Travel APP</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <!--
-        <link rel="stylesheet" href="./styles/resets.css">
-        <link rel="stylesheet" href="./styles/base.scss">
-        <link rel="stylesheet" href="./styles/header.scss">
-        <link rel="stylesheet" href="./styles/form.scss">
-        <link rel="stylesheet" href="./styles/footer.scss">
-        -->
     </head>
 
     <body>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                   <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Natural Language Processing</a>
+                    <a class="navbar-brand" href="#">Final</a>
                   </div>
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Summary</a></li>
+                    <li class="active"><a href="#">Travel APP</a></li>
                     
                   </ul>
                 </div>
               </nav>
         
-              <img class="logo" src="./resources/logo.png" alt="My Logo"> 
+              <img class="logo" src="../media/logo.png" alt="My Logo"> 
 
         <main>
             <section>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <input id="city" type="text" name="input" value="" onblur="onBlur()" placeholder="URL Link">
+                    <div class="col-8">
+                    <input id="city" type="text" name="input" value="" placeholder="Name of the city">
                     <br> 
-                    <label>Enter the summary size </label>
+                    <label>Travel date </label>
                     <br>
-                    <select class="form-control" id="summarySize">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                      </select>
+                    <input class="form-control" type="date" value="2021-03-27" id="date">
                     <input class="btn btn-primary" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                    </div>
                 </form>
             <section>
 
             <section>
-                <strong>Summary:</strong> <br><br>
+                <strong>Location:</strong> <br><br>
                 <div id="location" style="color: white;"></div>
+            </section>
+
+            <section>
+                <strong>Your trip is: </strong> <br><br>
+                <div id="countdown" style="color: white;"></div>
             </section>
         </main>
 
