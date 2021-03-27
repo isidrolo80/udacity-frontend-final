@@ -31,11 +31,13 @@ function handleSubmit(event) {
         return res.json()
     })
     .then(function(data) {
+        console.log(data)
+        document.getElementById('naturalLocation').innerHTML = data.toponymName+', '+data.countryName+' is'
         document.getElementById('location').innerHTML = '<b>Latitud: </b>'+data.lat+'<br><b>Longitud: </b>'+data.lng
-        if ((difference.getFullYear() - 1970) >= 0) {
+        if ((difference.getFullYear() - 1970) >= 0) { //If a date in the future is selected
             document.getElementById('countdown').innerHTML = (difference.getFullYear() - 1970)+'<b> Years</b><br>'+difference.getMonth()+'<b> Months</b><br>'+difference.getDate()+'<b> Days</b><br>Away'
-        } else {
-
+        } else { //If a past date is selected
+            document.getElementById('countdown').innerHTML = "The trip has already passed"
         }
     })
 
