@@ -8,6 +8,16 @@ function countdown(tripDate) {
     return difference
 }
 
+function requestWeather(lat, long) {
+    fetch('http://localhost:8081/weather', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({lat: lat, long: long}),
+    })
+}
+
 function handleSubmit(event) {
     event.preventDefault()
 
@@ -34,6 +44,7 @@ function handleSubmit(event) {
         console.log(data)
         document.getElementById('naturalLocation').innerHTML = data.toponymName+', '+data.countryName+' is'
         document.getElementById('location').innerHTML = '<b>Latitud: </b>'+data.lat+'<br><b>Longitud: </b>'+data.lng
+        requestWeather(data.lat, data.lng)
         if ((difference.getFullYear() - 1970) >= 0) { //If a date in the future is selected
             document.getElementById('countdown').innerHTML = (difference.getFullYear() - 1970)+'<b> Years</b><br>'+difference.getMonth()+'<b> Months</b><br>'+difference.getDate()+'<b> Days</b><br>Away'
         } else { //If a past date is selected

@@ -5,6 +5,7 @@ const fetch = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
 
+
 /*
 const geonames = Geonames({
   username: process.env.geonames_username,
@@ -57,6 +58,39 @@ app.post('/makeSummary', async(req, res)=>{
 	  console.error(err);
 	}
     
+})
+
+app.post('/weather', async (req, res)=> {
+    //var lat = req.body.lat;
+	//var long = req.body.long;
+
+	  request({
+      url:'https://api.weatherbit.io/v2.0/forecast/daily?lat='+lat+'&lon='+long+'&key='+process.env.weatherbit_api,
+      method:'GET'
+      },function(err,response){
+        if(err){
+            console.log("Error",err);
+        }
+        else{
+            console.log(response);
+        }
+
+    });
+
+/*
+	const myWeather = await fetch('https://api.weatherbit.io/v2.0/forecast/daily?lat='+lat+'&lon='+long+'&key='+process.env.weatherbit_api, {
+		method: "MyWeather"
+	});
+	console.log(myWeather)
+	
+	try {
+		const weather = await myWeather.json();
+		//res.json(summary)
+		res.send(myWeather)
+	} catch (error){
+		console.log("error", error)
+	}
+	*/
 })
 
 // designates what port the app will listen to for incoming requests
