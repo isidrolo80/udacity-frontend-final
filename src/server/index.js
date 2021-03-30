@@ -5,6 +5,10 @@ const fetch = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
 
+//Configure https reuquests 
+const https = require('https');
+
+const request = require('request');
 
 /*
 const geonames = Geonames({
@@ -34,13 +38,19 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('dist'))
 
 
+
+
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
+
+
 app.get('/textClassification', function (req, res) {
     res.sendFile('dist/textClassification.html')
 })
+
+
 
 app.post('/makeSummary', async(req, res)=>{
 
@@ -60,37 +70,64 @@ app.post('/makeSummary', async(req, res)=>{
     
 })
 
-app.post('/weather', async (req, res)=> {
-    //var lat = req.body.lat;
-	//var long = req.body.long;
 
-	  request({
-      url:'https://api.weatherbit.io/v2.0/forecast/daily?lat='+lat+'&lon='+long+'&key='+process.env.weatherbit_api,
-      method:'GET'
-      },function(err,response){
-        if(err){
-            console.log("Error",err);
-        }
-        else{
-            console.log(response);
-        }
 
-    });
+
+app.get('/weather', async (req, res)=> {
+	var lat = req.query.lat
+    //let lat = req.body.lat;
+	//let long = req.body.long;
+	var long = req.query.long
+	var isPast = req.query.isPast
+	let URL = 'https://api.weatherbit.io/v2.0/forecast/daily?lat='+lat+'&lon='+long+'&key='+process.env.weatherbit_api;
+	let myData1;
+
+ 
+
 
 /*
-	const myWeather = await fetch('https://api.weatherbit.io/v2.0/forecast/daily?lat='+lat+'&lon='+long+'&key='+process.env.weatherbit_api, {
-		method: "MyWeather"
-	});
-	console.log(myWeather)
-	
-	try {
-		const weather = await myWeather.json();
-		//res.json(summary)
-		res.send(myWeather)
-	} catch (error){
-		console.log("error", error)
+	fetch(URL)
+    .then(res => res.json())
+    .then(data => myData1 = data)
+    .then(() => console.log(myData1))
+
+    */
+console.log("isPast ="+isPast)
+
+if(isPast == "false") {
+
+	try{
+
+		await https.get(URL, (resp) => {
+		  let data = '';
+
+		  // A chunk of data has been received.
+		  resp.on('data', (chunk) => {
+		    data += chunk;
+		  });
+
+		  // The whole response has been received. Print out the result.
+		  resp.on('end', () => {
+		    myData1 = JSON.parse(data).data[15].datetime;
+		    latestDate = new Date(myData1)
+		    console.log(latestDate)
+
+		    res.send(JSON.parse(data).data[15])
+		  });
+
+		})
+
+	}catch(err){
+		console.log(err);
 	}
-	*/
+
+} else {
+	res.send('{ "result": "The date is in the past"}')
+}
+
+
+
+
 })
 
 // designates what port the app will listen to for incoming requests
