@@ -24,8 +24,8 @@ function countdown1(tripDate) {
 
 
 
-function requestWeather(lat, long, isPast) {
-    fetch('http://localhost:8081/weather?lat='+lat+'&long='+long+'&isPast='+isPast, {
+function requestWeather(lat, long, differenceDays) {
+    fetch('http://localhost:8081/weather?lat='+lat+'&long='+long+'&differenceDays='+differenceDays, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,6 @@ function handleSubmit(event) {
     let tripDate = new Date(date)
     tripDate = new Date(tripDate.setDate(tripDate.getDate() + 1))
     //console.log('dateOnEvent: '+tripDate);
-    let isPast;
     let difference = countdown(tripDate)
     let differenceDays = countdown1(tripDate)
     
@@ -72,14 +71,12 @@ function handleSubmit(event) {
         console.log(data)
         document.getElementById('naturalLocation').innerHTML = data.toponymName+', '+data.countryName+' is'
         document.getElementById('location').innerHTML = '<b>Latitud: </b>'+data.lat+'<br><b>Longitud: </b>'+data.lng
-        if (differenceDays >= 0) { //If a date in the future is selected
-            isPast = false;
+        if (differenceDays > 0) { //If a date in the future is selected
             document.getElementById('countdown').innerHTML = (difference.getFullYear() - 1970)+'<b> Years</b><br>'+difference.getMonth()+'<b> Months</b><br>'+difference.getDate()+'<b> Days</b><br>Away<br><br><b>This is a total of '+differenceDays+' days until your trip'
         } else { //If a past date is selected
-            isPast = true;
             document.getElementById('countdown').innerHTML = "The trip has already passed"
         }
-            requestWeather(data.lat, data.lng, isPast)
+            requestWeather(data.lat, data.lng, differenceDays)
     })
 
 

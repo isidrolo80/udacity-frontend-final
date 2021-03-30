@@ -78,23 +78,11 @@ app.get('/weather', async (req, res)=> {
     //let lat = req.body.lat;
 	//let long = req.body.long;
 	var long = req.query.long
-	var isPast = req.query.isPast
+	var differenceDays = parseInt(req.query.differenceDays, 10);
 	let URL = 'https://api.weatherbit.io/v2.0/forecast/daily?lat='+lat+'&lon='+long+'&key='+process.env.weatherbit_api;
 	let myData1;
 
- 
-
-
-/*
-	fetch(URL)
-    .then(res => res.json())
-    .then(data => myData1 = data)
-    .then(() => console.log(myData1))
-
-    */
-console.log("isPast ="+isPast)
-
-if(isPast == "false") {
+if(differenceDays >= 1) {
 
 	try{
 
@@ -112,7 +100,12 @@ if(isPast == "false") {
 		    latestDate = new Date(myData1)
 		    console.log(latestDate)
 
-		    res.send(JSON.parse(data).data[15])
+		    if (differenceDays <= 15) { 
+		    res.send(JSON.parse(data).data[differenceDays])
+			} else {
+			res.send('{ "result": "Cant get weather for trips that are 16 days or further in the future"}')
+			}
+
 		  });
 
 		})
