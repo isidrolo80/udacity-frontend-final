@@ -123,6 +123,39 @@ if(differenceDays >= 1) {
 
 })
 
+app.get('/requestImage', async (req, res) => {
+	var city = req.query.city
+	let URL = 'https://pixabay.com/api/?key='+process.env.pixabay_api+'&q='+city;
+
+	try{
+		await https.get(URL, (resp) => {
+			let data ='';
+
+			resp.on('data', (chunk) => {
+				data += chunk;
+			});
+
+			resp.on('end', () => {
+				let myData = JSON.parse(data)
+				let totalHits = parseInt(myData.totalHits, 10)
+				let randomImage = Math.floor(Math.random() * totalHits);
+				if (totalHits > 0) {
+					console.log("randomeimage: "+randomImage)
+					console.log(JSON.parse(data).hits[randomImage])
+					res.send(myData.hits[2].webformatURL)	
+				} else {
+					res.send('{ "result": "There are no images for this city"}')
+				}
+				//console.log("Image Info: "+myData.hits[randomImage].webformatURL)
+				
+			})
+		})
+	} catch(err){
+		console.log(err);
+	}
+
+})
+
 // designates what port the app will listen to for incoming requests
 app.listen(8081, function () {
     console.log('Example app listening on port 8081!')

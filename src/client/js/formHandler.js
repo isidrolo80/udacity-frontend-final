@@ -44,6 +44,24 @@ function requestWeather(lat, long, differenceDays) {
     })
 }
 
+function requestImage(city) {
+    fetch('http://localhost:8081/requestImage/?city='+city, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    
+    .then(res => {
+        return res.json()
+    })
+
+    .then(function(data) {
+        console.log("image:"+data)
+        document.getElementById("cityImage").innerHTML = '<img src="'+data+'" alt="City image" width="500" height="600">'
+    })
+}
+
 
 
 function handleSubmit(event) {
@@ -80,6 +98,7 @@ function handleSubmit(event) {
             document.getElementById('countdown').innerHTML = "The trip has already passed"
         }
             requestWeather(data.lat, data.lng, differenceDays)
+            requestImage(city)
     })
 
 

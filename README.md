@@ -24,3 +24,5 @@ This is a project and not meant for contribution
 
 
 
+license_key = "72052662f26f12d782a580748a8a59e2"
+geonames_username = "isidrolo80"
