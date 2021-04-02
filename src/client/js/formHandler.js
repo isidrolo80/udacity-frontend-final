@@ -57,8 +57,7 @@ function requestImage(city) {
     })
 
     .then(function(data) {
-        console.log("image:"+data)
-        document.getElementById("cityImage").innerHTML = '<img src="'+data+'" alt="City image" width="500" height="600">'
+        document.getElementById("cityImage").innerHTML = '<img src="'+data.webformatURL+'" alt="City image" width="500" height="600">'
     })
 }
 

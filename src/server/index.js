@@ -138,11 +138,20 @@ app.get('/requestImage', async (req, res) => {
 			resp.on('end', () => {
 				let myData = JSON.parse(data)
 				let totalHits = parseInt(myData.totalHits, 10)
-				let randomImage = Math.floor(Math.random() * totalHits);
-				if (totalHits > 0) {
-					console.log("randomeimage: "+randomImage)
-					console.log(JSON.parse(data).hits[randomImage])
-					res.send(myData.hits[2].webformatURL)	
+				let randomImage
+				//The API returns a maximum of 20 photos per query. We set a max of 20 for the random image
+				if(totalHits > 20) {
+						console.log("inside totalits+20")
+					    randomImage = Math.floor(Math.random() * 20);
+					} else {
+						console.log("inside else")
+					    randomImage = Math.floor(Math.random() * totalHits);
+					}
+					console.log(randomImage)
+				if (typeof(randomImage) != "undefined") {
+					//console.log("randomeimage: "+randomImage)
+					//console.log(myData.hits[30])
+					res.send(myData.hits[randomImage])
 				} else {
 					res.send('{ "result": "There are no images for this city"}')
 				}
