@@ -35,6 +35,7 @@ pixabay_api = "MyPixaBayAPI"
 npm run dev //to run in development mode
 npm run build //To update list files
 npm run start //Starts the service on port 8081 
+npm run test //Use Jest to run test files
 ```
 npm run start should be used on a different terminal window if using the development environment as it initializes a service needed to run the API
 

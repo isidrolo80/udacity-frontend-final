@@ -3,13 +3,8 @@ function countdown(tripDate) {
     console.log("right now: "+newDate)
     console.log("trip date: "+tripDate)
 
-    //let today = new Date().toISOString().slice(0, 10)
     var difference = new Date(tripDate.getTime() - newDate.getTime());
-    //difference.setHours(0, 0, 0, 0);
     console.log('difference '+difference)
-    //console.log(difference.getFullYear() - 1970) //The date starts in 1970 so the result will always show as 1970 and we have to substract this value
-    //console.log(difference.getMonth())
-    //console.log(difference.getDate())
     return difference
 }
 
@@ -72,11 +67,10 @@ function handleSubmit(event) {
     //Check if the URL provided is valid
     let tripDate = new Date(date)
     tripDate = new Date(tripDate.setDate(tripDate.getDate() + 1))
-    //console.log('dateOnEvent: '+tripDate);
     let difference = countdown(tripDate)
     let differenceDays = countdown1(tripDate)
     
-    fetch('http://localhost:8081/makeSummary', {
+    fetch('http://localhost:8081/cityInfo', {
         method: 'POST',
          headers: {
             'Content-Type': 'application/json',
@@ -99,8 +93,6 @@ function handleSubmit(event) {
             requestWeather(data.lat, data.lng, differenceDays)
             requestImage(city)
     })
-
-
 }
 
 
