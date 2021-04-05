@@ -83,7 +83,6 @@ if(differenceDays >= 1) {
 		  	//We get the last value so we know the latest date of which we can get the weather. 
 		    myData1 = JSON.parse(data).data[15].datetime;
 		    latestDate = new Date(myData1)
-		    console.log(latestDate)
 
 		    if (differenceDays <= 15) { 
 		    res.send(JSON.parse(data).data[differenceDays])
@@ -123,12 +122,10 @@ app.get('/requestImage', async (req, res) => {
 				let randomImage
 				//The API returns a maximum of 20 photos per query. We set a max of 20 for the random image
 				if(totalHits > 20) {
-						console.log("inside totalits+20")
 					    randomImage = Math.floor(Math.random() * 20);
 					} else {
 					    randomImage = Math.floor(Math.random() * totalHits);
 					}
-					console.log(randomImage)
 				if (typeof(randomImage) != "undefined") {
 					res.send(myData.hits[randomImage])
 				} else {

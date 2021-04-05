@@ -1,10 +1,7 @@
 function countdown(tripDate) {
     let newDate = new Date()
-    console.log("right now: "+newDate)
-    console.log("trip date: "+tripDate)
 
     var difference = new Date(tripDate.getTime() - newDate.getTime());
-    console.log('difference '+difference)
     return difference
 }
 
@@ -13,7 +10,6 @@ function countdown1(tripDate) {
     var difference = new Date(tripDate.getTime() - newDate.getTime());
     var dayTransform=1000*60*60*24; //We transform from milisecond to second, to hour to days. 
     var numberOfdays = Math.ceil(difference/dayTransform)
-    console.log("numberOfdays: "+numberOfdays)
     return numberOfdays
 }
 
@@ -32,7 +28,6 @@ function requestWeather(lat, long, differenceDays) {
     })
 
     .then(function(data) {
-        console.log(data)
         document.getElementById("weather").innerHTML = "<b>High: </b> "+data.app_max_temp+"<br><b>Low: </b>"+data.app_min_temp+"<br><b>"+data.weather.description+"</b>"
         document.getElementById("weatherIcon").innerHTML = "<img src='https://www.weatherbit.io/static/img/icons/"+data.weather.icon+".png' height='100px' width='100px'>"
 
@@ -82,7 +77,6 @@ function handleSubmit(event) {
         return res.json()
     })
     .then(function(data) {
-        console.log(data)
         document.getElementById('naturalLocation').innerHTML = data.toponymName+', '+data.countryName+' is'
         document.getElementById('location').innerHTML = '<b>Latitud: </b>'+data.lat+'<br><b>Longitud: </b>'+data.lng
         if (differenceDays > 0) { //If a date in the future is selected
