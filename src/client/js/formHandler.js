@@ -39,7 +39,8 @@ function requestWeather(lat, long, differenceDays) {
     .then(function(data) {
         //console.log("my data: "+ JSON.stringify(data))
         console.log(data)
-        document.getElementById("weather").innerHTML = "<b>High: </b> "+data.app_max_temp+"<br><b>Low: </b>"+data.app_min_temp+"<br><b>"+data.weather.description+"</b>"
+        document.getElementById("weather").innerHTML = "<b>High: </b> "+data.app_max_temp+"<br><b>Low: </b>"+data.app_min_temp+"<br><b>"+data.weather.description+"</b><br><img src='https://www.weatherbit.io/static/img/icons/"+data.weather.icon+".png'>"
+
 
     })
 }

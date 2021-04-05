@@ -96,6 +96,7 @@ if(differenceDays >= 1) {
 
 		  // The whole response has been received. Print out the result.
 		  resp.on('end', () => {
+		  	//We get the last value so we know the latest date of which we can get the weather. 
 		    myData1 = JSON.parse(data).data[15].datetime;
 		    latestDate = new Date(myData1)
 		    console.log(latestDate)
