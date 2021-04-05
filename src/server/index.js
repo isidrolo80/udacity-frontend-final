@@ -22,7 +22,6 @@ geonames = new Geonames({username: process.env.geonames_username, lan: 'en', enc
 
 var path = require('path')
 const express = require('express')
-var APIResponse = require('./API.js')
 var bodyParser = require('body-parser')
 var cors = require('cors')
 
@@ -168,6 +167,5 @@ app.get('/requestImage', async (req, res) => {
 
 // designates what port the app will listen to for incoming requests
 app.listen(8081, function () {
-    console.log('Example app listening on port 8081!')
-    console.log('Your License key is '+process.env.license_key);
+    console.log('CAPSTONE project listening on port 8081!')
 })

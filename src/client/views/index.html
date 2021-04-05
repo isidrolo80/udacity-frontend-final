@@ -12,16 +12,10 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                   <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Final</a>
+                    <a class="navbar-brand" href="">CAPSTONE</a>
                   </div>
-                  <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Travel APP</a></li>
-                    
-                  </ul>
                 </div>
               </nav>
-        
-              <img class="logo" src="../media/logo.png" alt="My Logo"> 
 
         <main>
             <section>
@@ -31,39 +25,31 @@
                     <br> 
                     <label>Travel date </label>
                     <br>
-                    <input class="form-control" type="date" value="2021-03-29" id="date">
-                    <input class="btn btn-primary" type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                    <input type="date" value="" id="date">
+                    <input class="btn btn-primary" type="submit" name="" value="ADD TRIP" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
                     </div>
                 </form>
             <section>
 
             <section>
-                <strong> Weather </strong> <br><br>
-                <div class="row"> 
-                    <div class="col-6" id="weather" style="color:white;"></div>
-                    <div class="col-6" id="cityImage"></div>
+                <strong> My Trip to </strong><div class="naturalLocation" id="naturalLocation"></div> <br><br>
+                <div class="row myCard"> 
+                    <div class="col-md-2" id="weather" style="color:white;"></div>
+                    <div class="col-md-2" id="weatherIcon"></div>
+                    <div class="col-md-2"id="location" style="color: white;"></div>
+                    <div class="col-md-2"id="countdown" style="color: white;"></div>
+                    <div class="col-md-4" id="cityImage"></div>
                 </div>
             </section>
 
-            <section>
-                <strong>Location:</strong> <br><br>
-                <div id="location" style="color: white;"></div>
-            </section>
-
-            <section>
-                <strong>Your trip to <div id="naturalLocation"></div> </strong> <br><br>
-                <div id="countdown" style="color: white;"></div>
-            </section>
         </main>
 
         <footer>
-            <p> Natural Language Processing Project </p>
+            <p> CAPSTONE PROJECT </p>
         </footer>
 
         <script>
-            // Check that service workers are supported
             if ('serviceWorker' in navigator) {
-                // Use the window load event to keep the page load performant
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/service-worker.js');
                 });

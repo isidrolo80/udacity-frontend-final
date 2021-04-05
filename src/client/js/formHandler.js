@@ -37,10 +37,9 @@ function requestWeather(lat, long, differenceDays) {
     })
 
     .then(function(data) {
-        //console.log("my data: "+ JSON.stringify(data))
         console.log(data)
-        document.getElementById("weather").innerHTML = "<b>High: </b> "+data.app_max_temp+"<br><b>Low: </b>"+data.app_min_temp+"<br><b>"+data.weather.description+"</b><br><img src='https://www.weatherbit.io/static/img/icons/"+data.weather.icon+".png'>"
-
+        document.getElementById("weather").innerHTML = "<b>High: </b> "+data.app_max_temp+"<br><b>Low: </b>"+data.app_min_temp+"<br><b>"+data.weather.description+"</b>"
+        document.getElementById("weatherIcon").innerHTML = "<img src='https://www.weatherbit.io/static/img/icons/"+data.weather.icon+".png' height='100px' width='100px'>"
 
     })
 }
@@ -58,7 +57,7 @@ function requestImage(city) {
     })
 
     .then(function(data) {
-        document.getElementById("cityImage").innerHTML = '<img src="'+data.webformatURL+'" alt="City image" width="500" height="600">'
+        document.getElementById("cityImage").innerHTML = '<img src="'+data.webformatURL+'" alt="City image" width="auto" height="100px">'
     })
 }
 
