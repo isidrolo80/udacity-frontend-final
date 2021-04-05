@@ -1,4 +1,4 @@
-var Geonames = require('geonames.js');
+let geonames = require('geonames.js');
 //Dependency to fetch data
 const fetch = require("node-fetch");
 //Configure dotenv to be able to use environment variables found in the .env file at the root folder
@@ -18,7 +18,7 @@ const geonames = Geonames({
 });
 */
 
-geonames = new Geonames({username: process.env.geonames_username, lan: 'en', encoding: 'JSON', type: 'json'});
+geonames = new geonames({username: process.env.geonames_username, lan: 'en', encoding: 'JSON', type: 'json'});
 
 var path = require('path')
 const express = require('express')
@@ -37,16 +37,21 @@ app.use(bodyParser.urlencoded({
 app.use(express.static('dist'))
 
 
+let showConsole1 = showConsole();
+// designates what port the app will listen to for incoming requests
+
+function showConsole() {
+	module.exports = app
+	app.listen(8081, function () {
+    console.log('CAPSTONE project listening on port 8081!')
+	})
+}
+
+
 
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
-})
-
-
-
-app.get('/textClassification', function (req, res) {
-    res.sendFile('dist/textClassification.html')
 })
 
 
@@ -123,6 +128,7 @@ if(differenceDays >= 1) {
 
 })
 
+
 app.get('/requestImage', async (req, res) => {
 	var city = req.query.city
 	let URL = 'https://pixabay.com/api/?key='+process.env.pixabay_api+'&q='+city;
@@ -144,7 +150,6 @@ app.get('/requestImage', async (req, res) => {
 						console.log("inside totalits+20")
 					    randomImage = Math.floor(Math.random() * 20);
 					} else {
-						console.log("inside else")
 					    randomImage = Math.floor(Math.random() * totalHits);
 					}
 					console.log(randomImage)
@@ -165,7 +170,3 @@ app.get('/requestImage', async (req, res) => {
 
 })
 
-// designates what port the app will listen to for incoming requests
-app.listen(8081, function () {
-    console.log('CAPSTONE project listening on port 8081!')
-})
